@@ -5,3 +5,6 @@ def add_book(title: str, author: str):
 
 def get_available_books():
     return book_repo.fetch_all_books()
+
+def remove_book(book_id: int):
+    return book_repo.delete_book(book_id)

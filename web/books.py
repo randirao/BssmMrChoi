@@ -14,3 +14,10 @@ def register_book(
 @router.get("/books")
 def list_books():
     return books.get_available_books()
+
+@router.delete("/books/{book_id}")
+def delete_book(book_id: int):
+    result = books.remove_book(book_id)
+    if not result["success"]:
+        raise HTTPException(status_code=404, detail=result["error"])
+    return {"message": "도서 삭제 성공!"}
