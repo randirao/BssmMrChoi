@@ -53,3 +53,13 @@ def get_borrowings_by_month(borrow_month: str):
     """, (borrow_month,))
     rows = cur.fetchall()
     return [{"borrower": r[0], "title": r[1], "author": r[2]} for r in rows]
+
+def get_borrowed_books_by_borrower(borrower: str):
+    cur.execute("""
+        SELECT bk.title
+        FROM borrowings b
+        JOIN books bk ON b.book_id = bk.book_id
+        WHERE b.borrower = ? AND b.return_at IS NULL
+    """, (borrower,))
+    rows = cur.fetchall()
+    return [r[0] for r in rows]

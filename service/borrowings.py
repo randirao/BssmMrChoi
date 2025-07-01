@@ -1,7 +1,7 @@
 from data import borrowings as data
 from cache import borrower as cache
 from data.borrowings import get_borrowings_by_month
-
+from data.borrowings import get_borrowed_books_by_borrower
 
 def test():
     db_test = data.test()
@@ -22,3 +22,6 @@ def borrow_book(borrower: str, title: str):
 
 def fetch_borrowings_by_month(borrow_month: str):
     return get_borrowings_by_month(borrow_month)
+
+def fetch_borrowings_by_borrower(borrow_at: str):
+    return get_borrowed_books_by_borrower(borrow_at)
