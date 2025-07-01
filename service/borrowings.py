@@ -1,5 +1,7 @@
 from data import borrowings as data
 from cache import borrower as cache
+from data.borrowings import get_borrowings_by_month
+
 
 def test():
     db_test = data.test()
@@ -17,3 +19,6 @@ def borrow_book(borrower: str, title: str):
         return {"success": True}
     except Exception as e:
         return {"success": False, "error": str(e)}
+
+def fetch_borrowings_by_month(borrow_month: str):
+    return get_borrowings_by_month(borrow_month)

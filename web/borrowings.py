@@ -14,3 +14,7 @@ def borrow_book(borrower: str = Form(...), title: str = Form(...)):
     if not result["success"]:
         raise HTTPException(status_code=400, detail=result["error"])
     return {"message": "도서 대출 성공!"}
+
+@router.get("/month/{borrow_month}")
+def get_borrowings_by_month(borrow_month: str):
+    return service.fetch_borrowings_by_month(borrow_month)

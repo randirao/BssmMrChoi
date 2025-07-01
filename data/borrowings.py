@@ -43,3 +43,13 @@ def return_book(borrower: str, title: str):
     cur.execute("UPDATE books SET available = 1 WHERE book_id = ?", (book_id,))
     con.commit()
     return True, "반납이 완료되었습니다."
+
+def get_borrowings_by_month(borrow_month: str):
+    cur.execute("""
+        SELECT b.borrower, bk.title, bk.author
+        FROM borrowings b
+        JOIN books bk ON b.book_id = bk.book_id
+        WHERE strftime('%Y-%m', b.borrow_at) = ?
+    """, (borrow_month,))
+    rows = cur.fetchall()
+    return [{"borrower": r[0], "title": r[1], "author": r[2]} for r in rows]
